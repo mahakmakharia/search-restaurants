@@ -10,8 +10,15 @@ import {
   TableBody,
   Box,
 } from "@material-ui/core";
+import { useHistory } from "react-router";
 
 const Locations = ({ locations }) => {
+  const history = useHistory();
+
+  const locationClickHandler = (id) => {
+    history.push(`/location/${id}`);
+  };
+
   const StyledTableCell = withStyles((theme) => ({
     head: {
       backgroundColor: theme.palette.common.black,
@@ -46,8 +53,15 @@ const Locations = ({ locations }) => {
           </TableHead>
           <TableBody>
             {locations.map((location) => (
-              <StyledTableRow key={location.id}>
+              <StyledTableRow
+                key={location.id}
+                style={{ cursor: "pointer" }}
+                onClick={() => locationClickHandler(location.id)}
+              >
                 <StyledTableCell component="th" scope="row">
+                  {location.name}
+                </StyledTableCell>
+                <StyledTableCell>
                   <img
                     src={location.country_flag_url}
                     className="flag"
@@ -55,9 +69,8 @@ const Locations = ({ locations }) => {
                     alt="flag"
                     style={{ marginRight: "5px" }}
                   />
-                  {location.name}
+                  {location.country_name}
                 </StyledTableCell>
-                <StyledTableCell>{location.country_name}</StyledTableCell>
               </StyledTableRow>
             ))}
           </TableBody>

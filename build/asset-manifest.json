@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.js": "/zomato-clone-js/static/js/main.e78e5274.chunk.js",
+    "main.js.map": "/zomato-clone-js/static/js/main.e78e5274.chunk.js.map",
+    "runtime-main.js": "/zomato-clone-js/static/js/runtime-main.2c46056c.js",
+    "runtime-main.js.map": "/zomato-clone-js/static/js/runtime-main.2c46056c.js.map",
+    "static/css/2.d34346ea.chunk.css": "/zomato-clone-js/static/css/2.d34346ea.chunk.css",
+    "static/js/2.7cab6767.chunk.js": "/zomato-clone-js/static/js/2.7cab6767.chunk.js",
+    "static/js/2.7cab6767.chunk.js.map": "/zomato-clone-js/static/js/2.7cab6767.chunk.js.map",
+    "index.html": "/zomato-clone-js/index.html",
+    "precache-manifest.e9217d3270c9147a5a271042a1e4aa00.js": "/zomato-clone-js/precache-manifest.e9217d3270c9147a5a271042a1e4aa00.js",
+    "service-worker.js": "/zomato-clone-js/service-worker.js",
+    "static/css/2.d34346ea.chunk.css.map": "/zomato-clone-js/static/css/2.d34346ea.chunk.css.map",
+    "static/js/2.7cab6767.chunk.js.LICENSE.txt": "/zomato-clone-js/static/js/2.7cab6767.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.2c46056c.js",
+    "static/css/2.d34346ea.chunk.css",
+    "static/js/2.7cab6767.chunk.js",
+    "static/js/main.e78e5274.chunk.js"
+  ]
+}

@@ -9,6 +9,8 @@ const HomePage = () => {
   const [locations, setLocations] = useState([]);
 
   const getLocations = async () => {
+    if (location === "") toast.error("Search is blank!");
+
     const locations = await getAllLocations(location);
     setLocations(locations);
 
