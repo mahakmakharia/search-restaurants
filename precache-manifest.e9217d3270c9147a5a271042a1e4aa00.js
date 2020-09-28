@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "6527e27187751c052c7e830d51644b0a",
+    "revision": "49212bf8368f7963ed4eaedcbf226b23",
     "url": "/zomato-clone-js/index.html"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/zomato-clone-js/static/js/2.7cab6767.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "d9593f3785639913f206",
-    "url": "/zomato-clone-js/static/js/main.4564eb61.chunk.js"
+    "revision": "d5dc031bc6113af5af9d",
+    "url": "/zomato-clone-js/static/js/main.e78e5274.chunk.js"
   },
   {
     "revision": "07d81443916573291dbb",
