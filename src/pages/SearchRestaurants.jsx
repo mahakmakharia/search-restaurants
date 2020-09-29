@@ -31,7 +31,6 @@ const SearchRestaurants = () => {
   // Restaurant State
   const [restaurantInput, setRestaurantInput] = useState("");
   const [restaurants, setRestaurants] = useState([]);
-  const [fetchedRestaurants, setFetchedRestaurants] = useState([]);
 
   useEffect(() => {
     getCategories();
@@ -50,7 +49,6 @@ const SearchRestaurants = () => {
     if (response?.restaurants?.length === 0)
       toast.error("No Restaurants found in this constraints");
     setRestaurants(response.restaurants);
-    setFetchedRestaurants(response.restaurants);
   };
 
   const getCategories = async () => {

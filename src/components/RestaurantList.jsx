@@ -5,7 +5,6 @@ import {
   CardActionArea,
   Button,
   CardContent,
-  CardMedia,
   Typography,
   CardActions,
 } from "@material-ui/core";
