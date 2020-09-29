@@ -102,7 +102,13 @@ const SearchRestaurants = () => {
 
   return (
     <>
-      <Box display="flex" flexWrap="wrap" alignContent="flex-end" p={1} m={1}>
+      <Box
+        display="flex"
+        flexWrap="wrap"
+        alignContent="flex-end"
+        mt={"6rem"}
+        mx={"2rem"}
+      >
         <Box style={{ marginRight: "20px" }}>
           <Select
             value={selectedCategory.id}
@@ -159,7 +165,7 @@ const SearchRestaurants = () => {
         </form>
       </Box>
 
-      <Box mt={"3rem"}>
+      <Box mt={"2rem"}>
         <RestaurantList restaurants={restaurants} />
       </Box>
     </>

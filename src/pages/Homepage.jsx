@@ -3,6 +3,7 @@ import { Box, Button, TextField } from "@material-ui/core";
 import Locations from "../components/Locations";
 import { toast } from "react-toastify";
 import { getAllLocations } from "../services/LocationServices";
+import illustration from "../assets/images/location.png";
 
 const HomePage = () => {
   const [location, setLocation] = useState("");
@@ -34,8 +35,18 @@ const HomePage = () => {
         display={"flex"}
         flexDirection={"column"}
         alignItems={"center"}
-        mt={"2.5rem"}
+        mt={"5.5rem"}
       >
+        <img
+          src={illustration}
+          style={
+            ({ display: "block" },
+            { margin: "auto 10px" },
+            { width: "50%" },
+            { height: "300px" })
+          }
+          alt=""
+        />
         <form onSubmit={formHandler}>
           <Box display={"flex"}>
             <Box mr={"1.5rem"}>
@@ -54,7 +65,7 @@ const HomePage = () => {
         </form>
         <br />
         {locations && locations.length ? (
-          <Box width={"95vw"} maxWidth={"1000px"} mt={"3rem"}>
+          <Box width={"95vw"} maxWidth={"1000px"} my={"3rem"}>
             <Locations locations={locations} />
           </Box>
         ) : null}
