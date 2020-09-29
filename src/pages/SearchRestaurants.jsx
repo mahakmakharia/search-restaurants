@@ -45,7 +45,6 @@ const SearchRestaurants = () => {
       categoryId: selectedCategory.id,
       cuisineName: selectedCuisines.cuisine_name,
     });
-    console.log(response);
     if (response?.restaurants?.length === 0)
       toast.error("No Restaurants found in this constraints");
     setRestaurants(response.restaurants);
@@ -86,8 +85,6 @@ const SearchRestaurants = () => {
 
   const restaurantChangeHandler = (e) => {
     const { value } = e.target;
-    console.log(value);
-
     setRestaurantInput(value);
   };
 
