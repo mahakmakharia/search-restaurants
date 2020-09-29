@@ -1,6 +1,5 @@
 import mAxios from "../utils/mAxios";
 import { toast } from "react-toastify";
-import { getLocation } from "./LocationServices";
 
 export const getAllCategories = async () => {
   try {
@@ -23,26 +22,18 @@ export const getAllCuisines = async (locationId) => {
   }
 };
 
-export const getAllRestaurants = async ({ locationId, cuisine, category }) => {
-  let final_restaurants = await getLocation(locationId);
-  console.log(final_restaurants);
-  // if (cuisine) {
-  //   final_restaurants = final_restaurants.filter((restaurant) =>
-  //     restaurant.cuisines.includes(cuisine)
-  //   );
-
-  //   if (category) {
-  //     final_restaurants = final_restaurants.filter((restaurant) =>
-  //       restaurant.highlights.find(category)
-  //     );
-  //   }
-  // } else {
-  //   final_restaurants = final_restaurants.filter((restaurant) =>
-  //     restaurant.highlights.find(category)
-  //   );
-  // }
-
-  return final_restaurants;
+export const getAllRestaurants = async (locationId) => {
+  try {
+    const { data } = await mAxios.get(
+      `search?entity_id=${locationId}&entity_type=city`
+    );
+    return data;
+  } catch (e) {
+    console.log(e);
+    toast.error("Cannot fetch Location", {
+      autoClose: 5000,
+    });
+  }
 };
 
 export const getRestaurant = async (restaurantId) => {
