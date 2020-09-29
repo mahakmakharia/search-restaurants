@@ -22,15 +22,47 @@ export const getAllCuisines = async (locationId) => {
   }
 };
 
-export const getAllRestaurants = async (locationId) => {
+export const getAllRestaurants = async ({
+  locationId,
+  categoryId,
+  cuisineName,
+}) => {
+  let data;
   try {
-    const { data } = await mAxios.get(
-      `search?entity_id=${locationId}&entity_type=city`
-    );
-    return data;
+    if (categoryId !== 0 && cuisineName !== "Select Cuisine")
+      data = await mAxios.get(
+        `/search?entity_id=${locationId}&entity_type=city&cuisines=${cuisineName}&category=${categoryId}`
+      );
+    else if (categoryId === 0 && cuisineName !== "Select Cuisine")
+      data = await mAxios.get(
+        `/search?entity_id=${locationId}&entity_type=city&cuisines=${cuisineName}`
+      );
+    else if (categoryId !== 0 && cuisineName === "Select Cuisine")
+      data = await mAxios.get(
+        `/search?entity_id=${locationId}&entity_type=city&category=${categoryId}`
+      );
+    else
+      data = await mAxios.get(
+        `/search?entity_id=${locationId}&entity_type=city`
+      );
+    return data.data;
   } catch (e) {
     console.log(e);
     toast.error("Cannot fetch Location", {
+      autoClose: 5000,
+    });
+  }
+};
+
+export const searchRestaurant = async ({ locationId, restaurantName }) => {
+  try {
+    const { data } = await mAxios.get(
+      `/search?entity_id=${locationId}&entity_type=city&q=${restaurantName}`
+    );
+    console.log(data);
+    return data;
+  } catch (e) {
+    toast.error("No such restaurant found", {
       autoClose: 5000,
     });
   }

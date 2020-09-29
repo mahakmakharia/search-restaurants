@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Box, MenuItem, Select, TextField, flexbox } from "@material-ui/core";
+import { Box, MenuItem, Select, TextField, Button } from "@material-ui/core";
 import {
   getAllCategories,
   getAllCuisines,
   getAllRestaurants,
+  searchRestaurant,
 } from "../services/RestaurantServices";
 import RestaurantList from "../components/RestaurantList";
 
@@ -39,8 +40,15 @@ const SearchRestaurants = () => {
   }, []);
 
   const getRestaurants = async () => {
-    const response = await getAllRestaurants(locationId);
-    if (!response) toast.error("No Restaurants found in this constraints");
+    toast.success("fetching");
+    const response = await getAllRestaurants({
+      locationId: locationId,
+      categoryId: selectedCategory.id,
+      cuisineName: selectedCuisines.cuisine_name,
+    });
+    console.log(response);
+    if (response?.restaurants?.length === 0)
+      toast.error("No Restaurants found in this constraints");
     setRestaurants(response.restaurants);
     setFetchedRestaurants(response.restaurants);
   };
@@ -63,12 +71,10 @@ const SearchRestaurants = () => {
 
     if (selectedCategory?.categories.id) {
       setSelectedCategory(selectedCategory.categories);
-      console.log(selectedCategory);
       getRestaurants();
     }
   };
   const cuisinesChangeHandler = (event) => {
-    console.log(event);
     const { value: cuisine_id } = event.target;
     const selectedCuisines = cuisines.find(
       (cuisine) => cuisine.cuisine.cuisine_id === cuisine_id
@@ -76,18 +82,27 @@ const SearchRestaurants = () => {
 
     if (selectedCuisines?.cuisine.cuisine_id) {
       setSelectedCuisines(selectedCuisines.cuisine);
-      console.log(selectedCuisines);
       getRestaurants();
     }
   };
 
   const restaurantChangeHandler = (e) => {
     const { value } = e.target;
-    const filteredRestaurants = fetchedRestaurants.filter((restaurant) =>
-      restaurant?.name?.includes(value)
-    );
-    setRestaurants(filteredRestaurants);
+    console.log(value);
+
     setRestaurantInput(value);
+  };
+
+  const searchHandler = async (e) => {
+    e.preventDefault();
+    if (restaurantInput === "") toast.error("search is empty");
+    else {
+      const filteredRestaurants = await searchRestaurant({
+        locationId: locationId,
+        restaurantName: restaurantInput,
+      });
+      setRestaurants(filteredRestaurants.restaurants);
+    }
   };
 
   return (
@@ -99,7 +114,9 @@ const SearchRestaurants = () => {
             onChange={categoryChangeHandler}
             style={{ minWidth: "140px" }}
           >
-            <MenuItem value={0}>Select Category</MenuItem>
+            <MenuItem value={0} disabled style={{ display: "none" }}>
+              Select Category
+            </MenuItem>
             {categories?.map((data) => {
               const category = data.categories;
               return (
@@ -116,7 +133,9 @@ const SearchRestaurants = () => {
             onChange={cuisinesChangeHandler}
             style={{ minWidth: "140px" }}
           >
-            <MenuItem value={0}>Select Cuisine</MenuItem>
+            <MenuItem value={0} disabled style={{ display: "none" }}>
+              Select Cuisine
+            </MenuItem>
 
             {cuisines?.map((data) => {
               const cuisine = data.cuisine;
@@ -128,15 +147,21 @@ const SearchRestaurants = () => {
             })}
           </Select>
         </Box>
-
-        <Box mr={"2rem"} width={"50%"}>
-          <TextField
-            fullWidth
-            placeholder={"Enter Restaurant Name"}
-            onChange={restaurantChangeHandler}
-            value={restaurantInput}
-          />
-        </Box>
+        <form onSubmit={searchHandler}>
+          <Box display={"flex"}>
+            <Box mr={"2rem"} width={"55%"}>
+              <TextField
+                fullWidth
+                placeholder={"Enter Restaurant Name"}
+                onChange={restaurantChangeHandler}
+                value={restaurantInput}
+              />
+            </Box>
+            <Button type={"submit"} variant="contained" color="primary">
+              Search
+            </Button>
+          </Box>
+        </form>
       </Box>
 
       <Box mt={"3rem"}>

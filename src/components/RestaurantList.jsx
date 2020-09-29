@@ -13,23 +13,23 @@ import RestaurantModal from "./RestaurantModal";
 import { getRestaurant } from "../services/RestaurantServices";
 
 const RestaurantList = ({ restaurants }) => {
-  // const [openModal, setOpenModal] = useState(false);
-  // const [restaurant, setRestaurant] = useState();
+  const [openModal, setOpenModal] = useState(false);
+  const [restaurant, setRestaurant] = useState();
 
-  // const restaurantClickHandler = async (id) => {
-  //   await getRestaurantDetails(id);
-  //   setOpenModal(true);
-  // };
+  const restaurantClickHandler = async (id) => {
+    await getRestaurantDetails(id);
+    setOpenModal(true);
+  };
 
-  // const modalCloseHandler = () => {
-  //   setOpenModal(false);
-  // };
+  const modalCloseHandler = () => {
+    setOpenModal(false);
+  };
 
-  // const getRestaurantDetails = async (restaurantId) => {
-  //   const restaurant = await getRestaurant(restaurantId);
+  const getRestaurantDetails = async (restaurantId) => {
+    const restaurant = await getRestaurant(restaurantId);
 
-  //   setRestaurant(restaurant);
-  // };
+    setRestaurant(restaurant);
+  };
   return (
     <div style={{ width: "100%" }}>
       <Box
@@ -69,24 +69,30 @@ const RestaurantList = ({ restaurants }) => {
                       <br />
                       {`Contact: ${restaurant?.phone_numbers}`}
                       <br />
+                      {`Timings: ${restaurant?.timings}`}
+                      <br />
                       {`Ratings: ${restaurant?.user_rating?.aggregate_rating}`}
                     </Typography>
                   </CardContent>
                 </CardActionArea>
                 <CardActions>
-                  <Button size="small" color="primary">
+                  <Button
+                    size="small"
+                    color="primary"
+                    onClick={() => restaurantClickHandler(restaurant.id)}
+                  >
                     Learn More
                   </Button>
                 </CardActions>
               </Card>
-              {/* <RestaurantModal
-              open={openModal}
-              handleModalClose={modalCloseHandler}
-              restaurant={restaurant}
-            /> */}
             </div>
           );
         })}
+        <RestaurantModal
+          open={openModal}
+          handleModalClose={modalCloseHandler}
+          restaurant={restaurant}
+        />
       </Box>
     </div>
   );

@@ -6,7 +6,7 @@ const RestaurantModal = ({ open, handleModalClose, restaurant }) => {
     <Dialog open={open} onClose={handleModalClose}>
       <Box width={"500px"} p={"2rem"}>
         <img
-          src={restaurant.image_urlfeatured_image}
+          src={restaurant?.featured_image}
           style={{ width: "100%" }}
           alt=""
         />
@@ -24,11 +24,12 @@ const RestaurantModal = ({ open, handleModalClose, restaurant }) => {
             {`Name: ${restaurant?.name}`}
           </Typography>
         </a>
-        <Typography>{`Phone Number: ${restaurant?.phoneNumber}`}</Typography>
+        <Typography>{`Phone Number: ${restaurant?.phone_numbers}`}</Typography>
         <Typography>{`Address: ${restaurant?.location?.address}`}</Typography>
         <Typography>{`Timings: ${restaurant?.timings}`}</Typography>
-        <Typography>{`Rating: ${restaurant?.rating?.rating_text}`}</Typography>
-        <Typography>{`Votes: ${restaurant?.rating?.votes}`}</Typography>
+        <Typography>{`Cuisines: ${restaurant?.cuisines}`}</Typography>
+        <Typography>{`Rating: ${restaurant?.user_rating?.aggregate_rating}`}</Typography>
+        <Typography>{`Votes: ${restaurant?.user_rating?.votes}`}</Typography>
       </Box>
     </Dialog>
   );
