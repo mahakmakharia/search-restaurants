@@ -36,6 +36,7 @@ const SearchRestaurants = () => {
     getCategories();
     getCuisines();
     getRestaurants();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getRestaurants = async () => {
