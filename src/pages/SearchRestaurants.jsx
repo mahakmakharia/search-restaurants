@@ -40,7 +40,7 @@ const SearchRestaurants = () => {
   }, []);
 
   const getRestaurants = async () => {
-    toast.success("fetching");
+    toast.success("Loading Restaurants...");
     const response = await getAllRestaurants({
       locationId: locationId,
       categoryId: selectedCategory.id,

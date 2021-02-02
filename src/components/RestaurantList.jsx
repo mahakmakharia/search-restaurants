@@ -1,19 +1,36 @@
 import React, { useState } from "react";
 import {
-  Box,
   Card,
   CardActionArea,
   Button,
   CardContent,
   Typography,
   CardActions,
+  Grid
 } from "@material-ui/core";
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import RestaurantModal from "./RestaurantModal";
 import { getRestaurant } from "../services/RestaurantServices";
+
+const useStyles = makeStyles((theme) =>
+  createStyles({
+    restaurantCard: {
+      margin: theme.spacing(2),
+    },
+    image: {
+      height: "300px", 
+      width: "100%",
+      [theme.breakpoints.only('xs')]: {
+        height: "210px",
+      },
+    }
+  }),
+);
 
 const RestaurantList = ({ restaurants }) => {
   const [openModal, setOpenModal] = useState(false);
   const [restaurant, setRestaurant] = useState();
+  const classes = useStyles();
 
   const restaurantClickHandler = async (id) => {
     await getRestaurantDetails(id);
@@ -31,28 +48,17 @@ const RestaurantList = ({ restaurants }) => {
   };
   return (
     <div style={{ width: "100%" }}>
-      <Box
-        display="flex"
-        flexWrap="wrap"
-        p={1}
-        m={1}
-        alignContent="center"
-        style={{ margin: "10px auto" }}
-      >
+      <Grid container>
         {restaurants?.map((data) => {
           const restaurant = data.restaurant;
           return (
-            <div>
-              <Card
-                style={{
-                  maxWidth: "400px",
-                  margin: "15px",
-                }}
+            <Grid item key={restaurant.id} xl={4} lg={4} md={4} sm={6} xs={12}>
+              <Card className={classes.restaurantCard}
               >
                 <CardActionArea>
                   <img
                     src={restaurant?.featured_image}
-                    style={{ maxHeight: "350px" }}
+                    className={classes.image}
                     alt=""
                   />
                   <CardContent>
@@ -84,15 +90,16 @@ const RestaurantList = ({ restaurants }) => {
                   </Button>
                 </CardActions>
               </Card>
-            </div>
+            </Grid>
           );
         })}
-        <RestaurantModal
-          open={openModal}
-          handleModalClose={modalCloseHandler}
-          restaurant={restaurant}
-        />
-      </Box>
+      </Grid>
+      <RestaurantModal
+        open={openModal}
+        handleModalClose={modalCloseHandler}
+        restaurant={restaurant}
+      />
+
     </div>
   );
 };

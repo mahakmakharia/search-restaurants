@@ -1,21 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Button, TextField } from "@material-ui/core";
 import Locations from "../components/Locations";
 import { toast } from "react-toastify";
 import { getAllLocations } from "../services/LocationServices";
-import illustration from "../assets/images/location.png";
 
 const HomePage = () => {
-  const [location, setLocation] = useState("");
+  const [location, setLocation] = useState("In");
   const [locations, setLocations] = useState([]);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => { getLocations()}, []);
 
   const getLocations = async () => {
     if (location === "") toast.error("Search is blank!");
 
     const locations = await getAllLocations(location);
     setLocations(locations);
+    console.log(locations)
 
-    if (!locations && !locations?.length)
+    if (!locations?.length)
       toast.error("No Locations found with this name");
   };
 
@@ -37,25 +40,16 @@ const HomePage = () => {
         alignItems={"center"}
         mt={"5.5rem"}
       >
-        <img
-          src={illustration}
-          style={
-            ({ display: "block" },
-            { margin: "auto 10px" },
-            { width: "50%" },
-            { height: "300px" })
-          }
-          alt=""
-        />
         <form onSubmit={formHandler}>
-          <Box display={"flex"}>
-            <Box mr={"1.5rem"}>
+          <Box display={"flex"} mt={3}>
+            <Box mr={"1.2rem"}>
               <TextField
-                placeholder={"Enter Location"}
+                placeholder="Kolkata"
                 variant="outlined"
                 type="text"
                 onChange={locationChangeHandler}
                 value={location}
+                label="Enter Location"
               />
             </Box>
             <Button type={"submit"} variant="contained" color="primary">
