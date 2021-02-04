@@ -16,7 +16,6 @@ const HomePage = () => {
 
     const locations = await getAllLocations(location);
     setLocations(locations);
-    console.log(locations)
 
     if (!locations?.length)
       toast.error("No Locations found with this name");
