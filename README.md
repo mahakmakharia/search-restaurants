@@ -1,6 +1,6 @@
-# zomato-clone-js
+# Search for restaurants globally
 
-Website is hosted at [netlify](https://restaurant-finder-react.netlify.app/)
+Visit the project [here](https://mahakmakharia.github.io/search-restaurants/)
 
 ## Install Locally
 
