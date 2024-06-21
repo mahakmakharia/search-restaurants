@@ -1,7 +1,5 @@
 # Search for restaurants globally
 
-Visit the project [here](https://mahakmakharia.github.io/search-restaurants/)
-
 ## Install Locally
 
 - Fork or Clone this repository
